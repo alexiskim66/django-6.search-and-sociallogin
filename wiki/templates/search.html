@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="title">
+<h1>Search Dongdukpedia</h1>
+</div>
+<br>
+
+<form action="." method="post"> {% csrf_token %}
+    {{ form.as_table }} <!-- form을 테이블 형식으로 표시, 여기서 form은 views에서 넘겨준 PostSearchForm 객체임-->
+    <input type="submit" value="Submit" class="btn btn-dark btn-sm">
+</form>
+
+<br>
+
+{% if wiki_list %}
+    {% for post in wiki_list %}
+        <!-- <h2><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h2> -->
+        <h2><a href="{%url 'detail' post.id %}">{{ post.title }}</a></h2>
+        {{ post.pub_date|date:"N d, Y" }}
+        <p>{{ post.summary }}...</p>
+    {% endfor %}
+
+{% elif search_term %}<!-- 검색란이 공란일 경우-->
+    <b><i>Search Word "{{ search_term }}" Not Found</i></b>
+{% endif %}
+{% endblock %}

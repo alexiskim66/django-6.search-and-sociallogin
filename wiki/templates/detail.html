@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+ <h1>{{blog.title}}</h1>
+ {{blog.writer}}<br>
+ {{blog.pub_date}}<br>
+ <hr>
+ {% if blog.image %}
+ <p><img src="{{blog.image.url}}" alt=""></p>
+ {% endif %}
+ {{blog.body}}<br>
+
+ <br>
+ <br>
+ <button type="button" class="btn btn-dark">
+    <a id="buttontext" href="{%url 'edit' blog.id %}">수정하기</a><br>
+ </button>
+
+ <button type="button" class="btn btn-dark">
+    <a  id="buttontext" href="{%url 'delete' blog.id %}">삭제하기</a><br>
+ </button>
+
+ 
+ {% endblock %}
